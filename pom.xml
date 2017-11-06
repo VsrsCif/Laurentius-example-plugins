@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>si.laurentius.example</groupId>
+    <artifactId>Laurentius-examples</artifactId>
+    <version>2.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>Laurentius-examples</name>
+    <url>www.sodisce.si</url>
+    <organization>
+        <name>Supreme Court Republic of Slovenia</name>
+        <url>http://www.sodisce.si/</url>
+    </organization>
+    <licenses>
+        <license>
+            <name>European Union Public Licence (EUPL)</name>
+            <url>https://joinup.ec.europa.eu/software/page/eupl</url>
+            <distribution>repo</distribution>
+            <comments>European Free/Open Source Software (F/OSS) licence</comments>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>jrc</id>
+            <name>Jože Rihtaršič</name>
+            <email>joze.rihtarsic@sodisce.si</email>
+            <organization>Supreme Court Republic of Slovenia</organization>
+            <organizationUrl>http://www.sodisce.si/</organizationUrl>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
+    <repositories>
+        <repository>
+            <id>laurentius-maven-repo</id>
+            <name>laurentius-maven-repo</name>
+            <url>https://github.com/VsrsCif/laurentius-maven-repo/raw/master/</url>
+        </repository>
+    </repositories>  
+    
+    <scm>
+        <connection>scm:svn:http://none</connection>
+        <developerConnection>scm:svn:http://none</developerConnection>
+        <url>scm:svn:http://none</url>
+    </scm>
+
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <!-- Laurentius version -->
+        <laurentius.version>2.0-SNAPSHOT</laurentius.version>
+		
+        <!-- DEPENDENCIES -->
+        <javax.javaee-api.version>8.0</javax.javaee-api.version>
+        <log4j.version>1.2.17</log4j.version>
+        <cxf-rt.version>3.1.6</cxf-rt.version>          
+        <org.primefaces.version>6.1</org.primefaces.version>
+        <junit.version>4.12</junit.version>
+
+
+        <!-- PLUGINS -->       
+        <maven.compiler.plugin.version>3.5.1</maven.compiler.plugin.version>    
+        <maven.war.plugin.version>2.6</maven.war.plugin.version>   
+        <maven.ejb.plugin.version>2.5.1</maven.ejb.plugin.version>  
+    </properties>
+
+    <modules>        
+        <module>interceptor-plugin</module>
+        <module>crontask-plugin</module>
+    </modules>
+
+
+    <dependencyManagement>
+        <dependencies>
+        
+            <dependency>
+                <groupId>si.vsrs.cif.sed</groupId>
+                <artifactId>Laurentius-msh-xsd</artifactId>
+                <version>${laurentius.version}</version>	
+                <scope>provided</scope>	
+            </dependency>
+
+            <dependency>
+                <groupId>si.vsrs.cif.sed</groupId>
+                <artifactId>Laurentius-commons</artifactId>
+                <version>${laurentius.version}</version>		
+                <scope>provided</scope>	
+            </dependency>
+            <dependency>
+                <groupId>si.vsrs.cif.sed</groupId>
+                <artifactId>Laurentius-plugin-interfaces</artifactId>
+                <version>${laurentius.version}</version>		
+                <scope>provided</scope>
+            </dependency>
+       
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>${log4j.version}</version>		
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-frontend-jaxws</artifactId>
+                <version>${cxf-rt.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <!-- GUI uses primeface componens --> 
+            <dependency>
+                <groupId>org.primefaces</groupId>
+                <artifactId>primefaces</artifactId>
+                <version>${org.primefaces.version}</version>
+                <scope>provided</scope>
+            </dependency>	
+        
+            <dependency>
+                <groupId>javax</groupId>
+                <artifactId>javaee-api</artifactId>
+                <version>${javax.javaee-api.version}</version>
+                <scope>provided</scope>
+            </dependency>
+        
+      
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+       
+        </dependencies>
+    </dependencyManagement>
+
+
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven.compiler.plugin.version}</version>                    
+                    <configuration>
+                        <source>${maven.compiler.source}</source>
+                        <target>${maven.compiler.target}</target>
+                        <showDeprecation>true</showDeprecation>
+                        <showWarnings>true</showWarnings>
+                    </configuration>
+                </plugin>
+               
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-ejb-plugin</artifactId>                                        
+                    <version>${maven.ejb.plugin.version}</version>
+                    <configuration>
+                        <ejbVersion>3.0</ejbVersion>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>${maven.war.plugin.version}</version>                    
+                </plugin>                              
+               
+               
+            </plugins>
+        </pluginManagement>
+    </build>
+
+
+</project>
